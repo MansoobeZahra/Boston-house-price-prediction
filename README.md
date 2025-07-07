@@ -1,6 +1,7 @@
-# 🏡 Boston House Price Predictor
-
+## 🏡 Boston House Price Predictor
+---
 A Streamlit-based web application that predicts median housing prices in Boston using Polynomial Regression, built from the Boston Housing Dataset. It supports interactive model tuning, residual visualization, and user-defined prediction.
+
 https://boston-house-price-prediction-jnbhdqich2tsn3j9s2pgcf.streamlit.app/
 ---
 
