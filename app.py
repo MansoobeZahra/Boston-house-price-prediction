@@ -5,10 +5,10 @@ from model import train_polynomial_model
 from sklearn.preprocessing import StandardScaler, PolynomialFeatures
 import matplotlib.pyplot as plt
 
-# 🎨 Page setup
+#  Page setup
 st.set_page_config(page_title="🏡 House Price Predictor", layout="wide", page_icon="📈")
 
-# 💅 Custom CSS
+#  Custom CSS
 st.markdown("""
 <style>
 html, body, [class*="st-"] {
@@ -34,7 +34,7 @@ h1, h2, h3 {
 """, unsafe_allow_html=True)
 
 
-# 🏠 Title
+#  Title
 st.title("🏡 Boston House Price Predictor")
 st.markdown("""
 Welcome to the **Boston House Price Predictor** powered by **Polynomial Regression**!  
@@ -44,13 +44,13 @@ Use the sliders and inputs to:
 - Predict custom house prices  
 """)
 
-# 📏 Degree slider
+#  Degree slider
 degree = st.slider("🎚️ Select Polynomial Degree", 1, 5, value=2)
 
-# 🚀 Train model and fetch results
+#  Train model and fetch results
 model, mse, r2, feature_names = train_polynomial_model(degree)
 
-# 🔁 Load the dataset and preprocess for residuals and prediction
+#  Load the dataset and preprocess for residuals and prediction
 df = pd.read_csv("Boston-house-price-data.csv").drop(columns=["AGE_BIN", "LSTAT_BIN"], errors='ignore')
 
 # Add simple engineered features
@@ -68,17 +68,17 @@ X_scaled = scaler.fit_transform(X)
 poly = PolynomialFeatures(degree)
 X_poly = poly.fit_transform(X_scaled)
 
-# 📊 Predict on entire dataset
+#  Predict on entire dataset
 y_pred = model.predict(X_poly)
 residuals = y - y_pred
 
-# 📈 Evaluation
+#  Evaluation
 with st.expander("📊 Model Evaluation", expanded=True):
     col1, col2 = st.columns(2)
     col1.metric("📉 Mean Squared Error", f"{mse:.2f}")
     col2.metric("📈 R² Score", f"{r2:.3f}")
 
-# 📉 Residuals
+#  Residuals
 with st.expander("🧯 Residual Plot"):
     fig, ax = plt.subplots()
     ax.scatter(y_pred, residuals, alpha=0.5)
@@ -88,7 +88,7 @@ with st.expander("🧯 Residual Plot"):
     ax.set_title("Residuals vs Predicted Price")
     st.pyplot(fig)
 
-# 📊 Feature importance (Top polynomial terms)
+#  Feature importance (Top polynomial terms)
 with st.expander("🔥 Top 10 Feature Importances (by Coefficient)"):
     coefs = model.coef_
     terms = poly.get_feature_names_out(feature_names)
@@ -100,7 +100,7 @@ with st.expander("🔥 Top 10 Feature Importances (by Coefficient)"):
 
     st.dataframe(coef_df)
 
-# 🎯 User Prediction
+#  User Prediction
 with st.expander("🎯 Predict Your Own House Price", expanded=True):
     st.markdown("Enter custom values for each feature below:")
 
